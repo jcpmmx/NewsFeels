@@ -6,6 +6,7 @@ from dateutil.parser import parse as dt_parse
 from django.conf import settings
 
 from newsfeels.utils import get_json, get_text
+from sources.nlp import watson
 
 
 class NewsAPISource(object):
@@ -18,7 +19,8 @@ class NewsAPISource(object):
     ARTICLES_LIMIT = 33  # How many articles to fetch each time
     ARTICLE_CONTENT_XPATH = None  # Valid XPath pointing to an HTML element with an article's content
 
-    def __init__(self):
+    def __init__(self, allow_print=False):
+        self.allow_print = allow_print
         if not self.SOURCE:
             raise ValueError('You need to specify a valid value for SOURCE')
         if not self.ARTICLE_CONTENT_XPATH:
@@ -50,5 +52,17 @@ class NewsAPISource(object):
             'published': dt_parse(story_data['publishedAt']),  # In UTC
             'url': story_data['url'],
         }
-        sentiment = None
+        sentiment = watson.get_sentiment(story)
+
+        if self.allow_print:
+            print('-------')
+            print('{} --- By {} ({})'.format(
+                key_information['title'], key_information['author'], key_information['published'])
+            )
+            if story:
+                print('Sentiment: {} ({})'.format(sentiment['label'].title(), sentiment['score']))
+            else:
+                print("(Article content couldn't be retrieved)")
+            print('-------')
+
         return story, key_information, sentiment

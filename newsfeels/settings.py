@@ -95,3 +95,7 @@ STATIC_URL = '/static/'
 # -------
 
 NEWSAPI_API_KEY = '3f726cccc761472fa2d0618858ae3461'
+
+IBM_CLOUD_API_ENDPOINT = 'https://gateway-wdc.watsonplatform.net/natural-language-understanding/api'
+IBM_CLOUD_API_KEY = 'pFYRrF6k6hOHw4mLYF6UmT066oLzhu1Al2pT-7GmZ5YU'
+IBM_CLOUD_API_VERSION = '2018-03-16'

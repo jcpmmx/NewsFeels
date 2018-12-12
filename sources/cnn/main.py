@@ -16,10 +16,11 @@ class CNNSource(NewsAPISource):
         # Just an exmaple to show that we could do some CNN-only post-processing here
         story, key_information, sentiment = super()._get_feels(story_data)
         key_information['author'] = key_information['author'].split(',', maxsplit=1)[0]
+
         return story, key_information, sentiment
 
 
 # For testing purposes
 if __name__ == '__main__':
-    cnn = CNNSource()
+    cnn = CNNSource(allow_print=True)
     cnn.get_latest_data()

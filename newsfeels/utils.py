@@ -6,7 +6,7 @@ import logging
 import requests
 from requests_html import HTMLSession
 
-logger = logging.getLogger(__name__)
+_logger = logging.getLogger(__name__)
 
 
 def get_json(url, method='get', **kwargs):
@@ -14,13 +14,16 @@ def get_json(url, method='get', **kwargs):
     Returns the available JSON response as a dict (if any) for the given URL, data and HTTP method.
     """
     try:
-        response = _get_requests_method(method)(url, **kwargs)
-        response.raise_for_status()
-        return response.json()
+        request_method = _get_requests_method(method)
+        if request_method:
+            response = request_method(url, **kwargs)
+            response.raise_for_status()
+            return response.json()
 
     except (requests.exceptions.ConnectionError, requests.exceptions.HTTPError) as e:
-        logger.error('[get_json] Error when trying "%s" to "%s": %s', method, url, str(e))
-        return {}
+        _logger.error('[get_json] Error when trying "%s" to "%s": %s', method, url, str(e))
+
+    return {}
 
 
 def get_text(url, xpath=None):
@@ -31,11 +34,12 @@ def get_text(url, xpath=None):
         response = HTMLSession().get(url)
         response.raise_for_status()
         if xpath:
-            return response.html.xpath(xpath, first=True).text
+            target_element = response.html.xpath(xpath, first=True)
+            return target_element.text if target_element else ''
         return response.html.text
 
     except (requests.exceptions.ConnectionError, requests.exceptions.HTTPError) as e:
-        logger.error('[get_text] Error when trying "%s": %s', url, str(e))
+        _logger.error('[get_text] Error when trying "%s": %s', url, str(e))
         return ''
 
 
@@ -46,4 +50,4 @@ def _get_requests_method(method='get'):
     _AVAILABLE_METHODS_MAP = {
         'get': requests.get,
     }
-    return _AVAILABLE_METHODS_MAP.get(method, lambda url, kwargs: None)
+    return _AVAILABLE_METHODS_MAP.get(method)
