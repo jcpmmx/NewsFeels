@@ -6,7 +6,7 @@ from dateutil.parser import parse as dt_parse
 from django.conf import settings
 
 from newsfeels.utils import get_json, get_text
-from sources.nlp import watson
+from nlp import watson
 
 
 class NewsAPISource(object):
@@ -57,7 +57,7 @@ class NewsAPISource(object):
         if self.allow_print:
             print('-------')
             print('{} --- By {} ({})'.format(
-                key_information['title'], key_information['author'], key_information['published'])
+                key_information['title'], key_information['author'] or '(Unknown)', key_information['published'])
             )
             if story:
                 print('Sentiment: {} ({})'.format(sentiment['label'].title(), sentiment['score']))

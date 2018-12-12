@@ -5,12 +5,9 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = '%_0y!pl+vh!21sso-gqffvg4$&mc%=^5@g^in9%tiu(wt9kzr$'
-
 DEBUG = True
-
+SECRET_KEY = '%_0y!pl+vh!21sso-gqffvg4$&mc%=^5@g^in9%tiu(wt9kzr$'
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -56,10 +53,7 @@ WSGI_APPLICATION = 'newsfeels.wsgi.application'
 # Database
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': {}
 }
 
 # Password validation
@@ -90,9 +84,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 
-# -------
-# -------
-# -------
+# ----------------------------------------------------------------------------------------------------------------------
+# Custom settings, common for all envs
+# ----------------------------------------------------------------------------------------------------------------------
 
 NEWSAPI_API_KEY = '3f726cccc761472fa2d0618858ae3461'
 
