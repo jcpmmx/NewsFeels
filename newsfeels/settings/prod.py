@@ -5,7 +5,7 @@ import django_heroku
 
 from newsfeels.settings.base import *
 
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['https://newsfeels-jcpmmx.herokuapp.com',]
 
 # ----------------------------------------------------------------------------------------------------------------------
