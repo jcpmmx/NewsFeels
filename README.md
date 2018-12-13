@@ -65,3 +65,4 @@ If we detect there are new articles, the home page is refreshed via JS.
 - Similar to above, improve the interaction with the async call to load articles by not forcing a page reload
 - Make `nlp` work with classes that can be pluggable in case we want to cadd a new NLP engine (i.e. Google's)
 - Automatically loop between available media outlets integrated so we go full plug-and-play
+- Clean article data (e.g. author, contents) to make it nicer to display and avoid external links to original source

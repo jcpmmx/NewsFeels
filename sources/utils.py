@@ -20,6 +20,7 @@ def load_articles():
     for source_class in _AVAILABLE_SOURCES:
         article_source = source_class()
         available_articles = article_source.get_latest_data()
-        some_article_created = Article.create_articles(article_source.SOURCE.value, available_articles)
+        if Article.create_articles(article_source.SOURCE.value, available_articles):
+            some_article_created = True
 
     return some_article_created

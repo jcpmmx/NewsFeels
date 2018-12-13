@@ -49,28 +49,31 @@ class Article(models.Model):
         """
         Takes a list of 3-tuple with data from articles and creates new DB records, if articles are new.
         """
-        some_article_created = False
+        current_count = cls.objects.all().count()
 
         for article_content, key_information, sentiment in available_articles:
             title = key_information['title']
             author = key_information['author']
             published = key_information['published']
             url = key_information['url']
-            external_id = cls._generate_hash(source, title, author, published, url)
+            possible_external_id = cls._generate_hash(source, title, author, published, url)
 
-            data = {
-                'source': source,
-                'external_id': external_id,
-                'title': title,
-                'author': author,
-                'published': published,
-                'url': url,
-                'content': article_content,
-                'sentiment_label': sentiment['label'],
-                'sentiment_score': sentiment['score'],
-            }
-            _, some_article_created = cls.objects.get_or_create(**data)
+            if not cls.objects.filter(external_id=possible_external_id).exists() and article_content:
+                data = {
+                    'source': source,
+                    'external_id': possible_external_id,
+                    'title': title,
+                    'author': author,
+                    'published': published,
+                    'url': url,
+                    'content': article_content,
+                    'sentiment_label': sentiment['label'],
+                    'sentiment_score': sentiment['score'],
+                }
+                cls.objects.create(**data)
 
+        new_count = cls.objects.all().count()
+        some_article_created = current_count != new_count
         return some_article_created
 
     @staticmethod
