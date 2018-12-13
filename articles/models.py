@@ -56,21 +56,20 @@ class Article(models.Model):
             author = key_information['author']
             published = key_information['published']
             url = key_information['url']
-            possible_external_id = cls._generate_hash(source, title, author, published, url)
+            external_id = cls._generate_hash(source, title, author, published, url)
 
-            if not cls.objects.filter(external_id=possible_external_id).exists() and article_content:
-                data = {
-                    'source': source,
-                    'external_id': possible_external_id,
-                    'title': title,
-                    'author': author,
-                    'published': published,
-                    'url': url,
-                    'content': article_content,
-                    'sentiment_label': sentiment['label'],
-                    'sentiment_score': sentiment['score'],
-                }
-                _, some_article_created = cls.objects.create(**data)
+            data = {
+                'source': source,
+                'external_id': external_id,
+                'title': title,
+                'author': author,
+                'published': published,
+                'url': url,
+                'content': article_content,
+                'sentiment_label': sentiment['label'],
+                'sentiment_score': sentiment['score'],
+            }
+            _, some_article_created = cls.objects.get_or_create(**data)
 
         return some_article_created
 
