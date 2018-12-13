@@ -3,14 +3,13 @@
 
 from newsfeels.settings.base import *
 
+DEBUG = True
+ALLOWED_HOSTS = ['localhost']
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ADD_A_PROPER_VALUE_HERE',
-        'USER': 'ADD_A_PROPER_VALUE_HERE',
-        'PASSWORD': 'ADD_A_PROPER_VALUE_HERE',
-        'HOST': 'ADD_A_PROPER_VALUE_HERE',
-        'PORT': 'ADD_A_PROPER_VALUE_HERE',
+        'NAME': 'newsfeels',
     }
 }
 

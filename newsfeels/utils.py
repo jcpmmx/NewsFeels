@@ -30,8 +30,10 @@ def get_text(url, xpath=None):
     """
     Returns the available text from a given URL.
     """
+    session = HTMLSession()
+
     try:
-        response = HTMLSession().get(url)
+        response = session.get(url)
         response.raise_for_status()
         if xpath:
             target_element = response.html.xpath(xpath, first=True)
@@ -41,6 +43,8 @@ def get_text(url, xpath=None):
     except (requests.exceptions.ConnectionError, requests.exceptions.HTTPError) as e:
         _logger.error('[get_text] Error when trying "%s": %s', url, str(e))
         return ''
+    finally:
+        session.close()
 
 
 def _get_requests_method(method='get'):
