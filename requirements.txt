@@ -4,11 +4,14 @@ bs4==0.0.1
 certifi==2018.11.29
 chardet==3.0.4
 cssselect==1.0.3
+dj-database-url==0.5.0
 Django==2.1.4
+django-heroku==0.3.1
 fake-useragent==0.1.11
 idna==2.8
 lxml==4.2.5
 parse==1.9.0
+psycopg2==2.7.6.1
 psycopg2-binary==2.7.6.1
 pyee==5.0.0
 pyppeteer==0.0.25
@@ -24,3 +27,4 @@ w3lib==1.19.0
 watson-developer-cloud==2.5.1
 websocket-client==0.48.0
 websockets==7.0
+whitenoise==4.1.2
