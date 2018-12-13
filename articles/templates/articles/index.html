@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block main_container %}
+    {% if article_list %}
+        <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Source</th>
+                <th scope="col">Title</th>
+                <th scope="col">Published</th>
+                <th scope="col">Sentiment</th>
+                <th scope="col">Link</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in article_list %}
+            {% with label=article.sentiment_label %}
+                <tr class="text-{% if label == 'positive' %}sucess{% elif label == 'negative' %}danger{% else %}default{% endif %}">
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ article.get_source_display }}</td>
+                    <td><strong>{{ article.title }}</strong></td>
+                    <td>{{ article.published|date:"M d, P" }}</td>
+                    <td>{% if label == 'positive' %}🙂{% elif label == 'negative' %}😠{% else %}😐{% endif %}</td>
+                    <td><a href="{{ article.url }}" target="_blank">Go</a></td>
+                </tr>
+            {% endwith %}
+        {% endfor %}
+        </tbody>
+        </table>
+    {% else %}
+        No data yet. Hold on for a bit and let us take care.
+    {% endif %}
+{% endblock main_container %}

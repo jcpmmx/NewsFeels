@@ -18,14 +18,21 @@ def get_sentiment(text):
     """
     Returns the sentiment of the given text, as a dict with label and score.
     """
+    label = 'NA'
+    score = 0
     try:
         if text:
-            return _watson_nlu.analyze(
+            sentiment_data = _watson_nlu.analyze(
                 text=text,
                 features=Features(sentiment=SentimentOptions())
             ).get_result()['sentiment']['document']
+            label = sentiment_data['label']
+            score = sentiment_data['score']
 
     except Exception as e:
         _logger.error('[get_sentiment] Error when trying with "%s...": %s', text[:100], str(e))
 
-    return {}
+    return {
+        'label': label,
+        'score': score
+    }

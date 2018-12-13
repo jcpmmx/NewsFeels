@@ -5,9 +5,7 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-DEBUG = True
 SECRET_KEY = '%_0y!pl+vh!21sso-gqffvg4$&mc%=^5@g^in9%tiu(wt9kzr$'
-ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -18,6 +16,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'articles',
 ]
 
 MIDDLEWARE = [
@@ -35,7 +34,9 @@ ROOT_URLCONF = 'newsfeels.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
