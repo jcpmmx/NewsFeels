@@ -17,7 +17,7 @@ class NewsAPISource(object):
     BASE_URL = 'https://newsapi.org/v2/everything'
     SOURCE = None  # Must be a valid News API value (e.g. cnn, the-verge)
 
-    ARTICLES_LIMIT = 3  # How many articles to process each time
+    ARTICLES_LIMIT = 10  # How many articles to process each time
     ARTICLE_CONTENT_XPATH = None  # Valid XPath pointing to an HTML element with an article's content
 
     def __init__(self, allow_print=False):

@@ -14,7 +14,9 @@ def load_articles():
     _AVAILABLE_SOURCES = (
         CNNSource,
     )
+    some_article_created = False
     for source_class in _AVAILABLE_SOURCES:
         article_source = source_class()
         available_articles = article_source.get_latest_data()
-        Article.create_articles(article_source.SOURCE.value, available_articles)
+        some_article_created = Article.create_articles(article_source.SOURCE.value, available_articles)
+    return some_article_created

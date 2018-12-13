@@ -49,6 +49,8 @@ class Article(models.Model):
         """
         Takes a list of 3-tuple with data from articles and creates new DB records, if articles are new.
         """
+        some_article_created = False
+
         for article_content, key_information, sentiment in available_articles:
             title = key_information['title']
             author = key_information['author']
@@ -68,7 +70,9 @@ class Article(models.Model):
                     'sentiment_label': sentiment['label'],
                     'sentiment_score': sentiment['score'],
                 }
-                cls.objects.create(**data)
+                _, some_article_created = cls.objects.create(**data)
+
+        return some_article_created
 
     @staticmethod
     def _generate_hash(source, title, author, published, url):

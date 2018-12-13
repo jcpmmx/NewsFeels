@@ -1,6 +1,7 @@
 # coding=utf-8
 
 
+from django.http import HttpResponse
 from django.views import generic
 
 from sources.utils import load_articles
@@ -15,5 +16,13 @@ class IndexView(generic.ListView):
     template_name = 'articles/index.html'
 
     def get_queryset(self):
-        # load_articles()  # To populate the DB with articles and their analysis
         return Article.objects.all()
+
+
+def load(request):
+    """
+    Small view that triggers the process for pulling articles and analyzing them.
+    """
+    if load_articles():
+        return HttpResponse()
+    return HttpResponse(status=204)
