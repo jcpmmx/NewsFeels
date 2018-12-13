@@ -12,7 +12,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
+  {% block scripts_head %}
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  {% endblock scripts_head %}
 </head>
 
 <body>
@@ -30,21 +32,23 @@
       </div>
     </div>
   </div>
-  <script type="text/javascript">
-    $(document).ready(function () {
-      var loader = $("#loader");
-      if (loader !== null) {
-        loader.click(function(e) {
-          e.preventDefault();
-          loader.text('Loading...');
-          $.get(loader.attr('href'), function(_, textStatus) {
-            if (textStatus === '200') location.reload();
-            loader.text('Nothing new, try again.');
+  {% block scripts_body %}
+    <script type="text/javascript">
+      $(document).ready(function () {
+        var loader = $("#loader");
+        if (loader !== null) {
+          loader.click(function(e) {
+            e.preventDefault();
+            loader.text('Loading...');
+            $.get(loader.attr('href'), function(_, textStatus) {
+              if (textStatus === '200') location.reload();
+              loader.text('Nothing new, try again.');
+            });
           });
-        });
-      }
-    });
-  </script>
+        }
+      });
+    </script>
+  {% endblock scripts_body %}
 </body>
 
 </html>
