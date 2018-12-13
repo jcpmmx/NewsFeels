@@ -30,16 +30,14 @@
                         </td>
                         <td class="text-small">{{ article.published|date:"M d" }}<br/>{{ article.published|date:"P" }}</td>
                         <td class="text-large text-center" title="{{ label|title }} ({{ article.sentiment_score }})">
-                            {% if label == 'positive' %}🙂{% elif label == 'negative' %}😠{% elif label == 'neutral' %}😐{% else %}❓{% endif %}
-                            {% if label in "positive,negative" %}
-                                <div class="progress">
-                                    <div 
-                                        class="progress-bar bg-{{ bs_color }}" role="progressbar"
-                                        style="width: {{ article.get_sentiment_percentage }}%"
-                                        aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"
-                                    ></div>
-                                </div>
-                            {% endif %}
+                            {% if label == 'positive' %}🙂{% elif label == 'negative' %}😠{% else %}😐{% endif %}
+                            <div class="progress">
+                                <div 
+                                    class="progress-bar bg-{{ bs_color }}" role="progressbar"
+                                    style="width: {{ article.get_sentiment_percentage }}%"
+                                    aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"
+                                ></div>
+                            </div>
                         </td>
                     </tr>
                 {% endwith %}

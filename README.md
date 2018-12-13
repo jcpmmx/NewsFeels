@@ -54,6 +54,7 @@ Having the article's basic data and now its contents and sentiment, we create a 
 
 In the home page we display all available articles, sorted by most recent.  
 Near the bottom of the table, we have a link that calls a small and secondary view that triggers the loading of new articles.  
+This view returns HTTP 200 and `OK` if new articles were stored, or HTTP 204 otherwise.  
 If we detect there are new articles, the home page is refreshed via JS.
 
 ### Limitations

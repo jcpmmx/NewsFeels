@@ -44,7 +44,9 @@ class NewsAPISource(object):
         if json_data and json_data['status'] == 'ok':
             # TODO(Julian): Check if we already parsed stories (using a DB table), or process and store them otherwise
             for article_data in json_data['articles'][:self.ARTICLES_LIMIT]:
-                available_articles.append(self._get_feels(article_data))
+                article_feels = self._get_feels(article_data)
+                if all(article_feels):
+                    available_articles.append(article_feels)
         return available_articles
 
     def _get_feels(self, article_data):
@@ -57,7 +59,7 @@ class NewsAPISource(object):
         - Key information is a dict with the following keys: title (str), author (str), published (datetime), url (str)
         - Sentiment is a dict with `label` (one of 'positive', 'negative' and 'neutral') and `score`
         """
-        article_content = get_text(article_data.get('url'), xpath=self.ARTICLE_CONTENT_XPATH) or '(None)'
+        article_content = get_text(article_data.get('url'), xpath=self.ARTICLE_CONTENT_XPATH)
         key_information = {
             'title': article_data['title'],
             'author': article_data['author'] or '(Unknown)',
@@ -71,7 +73,8 @@ class NewsAPISource(object):
             print('{} --- By {} ({})'.format(
                 key_information['title'], key_information['author'], key_information['published'])
             )
-            print('Sentiment: {} ({})'.format(sentiment['label'].title(), sentiment['score']))
+            if sentiment:
+                print('Sentiment: {} ({})'.format(sentiment['label'].title(), sentiment['score']))
             print('-------')
 
         return article_content, key_information, sentiment
