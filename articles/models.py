@@ -37,6 +37,13 @@ class Article(models.Model):
             self.external_id = self._generate_hash(*uuid_components)
         super().save(*args, **kwargs)
 
+    def get_sentiment_percentage(self):
+        """
+        Returns the sentiment score as a percentage value (form 0 to 100).
+        e.g. -0.65 --> 65
+        """
+        return abs(self.sentiment_score)*100
+
     @classmethod
     def create_articles(cls, source, available_articles):
         """

@@ -1,5 +1,8 @@
 <!doctype html>
-<html class="no-js" lang="">
+{% load static %}
+
+
+<html lang="en-US">
 
 <head>
   <meta charset="utf-8">
@@ -8,18 +11,21 @@
   <meta name="description" content="NewsFeels analyzes the sentiment of new articles and stories from media outlets - powered by IBM's Watson NLU">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
 </head>
 
 <body>
   <div class="container">
     <div class="row">
       <div class="col-sm-12 col-md-10 offset-md-1">
-        <h1>
-          {% block body_title %}NewsFeels{% endblock body_title %}
-        </h1>
-        <p><small class="text-muted">Analyzing sentiments of new articles and stories from media outlets - powered by IBM's Watson NLU.</small></p>
-        <div id="main_container">{% block main_container %}{% endblock main_container %}</div>
-        <p class="text-center" style="margin-top:13px;color:#ccc;font-size:.7em;">&copy;2018 Julian Perez - julianperez.me</p>
+        <div id="big_container">
+          <h1>
+            {% block body_title %}NewsFeels{% endblock body_title %}
+          </h1>
+          <p><small class="text-muted">Analyzing sentiments of new articles and stories from media outlets - powered by IBM's Watson NLU.</small></p>
+          <div id="main_container">{% block main_container %}{% endblock main_container %}</div>
+          <p id="about">&copy;2018 Julian Perez - julianperez.me</p>
+        </div>
       </div>
     </div>
   </div>

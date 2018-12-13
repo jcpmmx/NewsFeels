@@ -1,0 +1,30 @@
+body {
+    background: #fff;
+    text-align: center;
+}
+
+.text-large {
+    font-size: 150%;
+}
+.text-small {
+    font-size: 70%;
+}
+
+#big_container {
+    padding: 13px 0;
+}
+
+#main_container {
+    padding: 13px 0;
+}
+#main_container table {
+    text-align: left;
+}
+#main_container table .progress {
+    height: 3px;
+}
+
+#about {
+    color: #ccc;
+    font-size: .7em;
+}

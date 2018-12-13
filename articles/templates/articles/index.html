@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load articles_utils %}
 
 
 {% block main_container %}
@@ -16,13 +17,22 @@
         </thead>
         <tbody>
         {% for article in article_list %}
-            {% with label=article.sentiment_label %}
-                <tr class="text-{% if label == 'positive' %}sucess{% elif label == 'negative' %}danger{% else %}default{% endif %}">
+            {% with label=article.sentiment_label bs_color=article.sentiment_label|get_sentiment_bs_color %}
+                <tr>
                     <th scope="row">{{ forloop.counter }}</th>
                     <td>{{ article.get_source_display }}</td>
                     <td><strong>{{ article.title }}</strong></td>
-                    <td>{{ article.published|date:"M d, P" }}</td>
-                    <td>{% if label == 'positive' %}🙂{% elif label == 'negative' %}😠{% else %}😐{% endif %}</td>
+                    <td class="text-small">{{ article.published|date:"M d" }}<br/>{{ article.published|date:"P" }}</td>
+                    <td class="text-large text-center" title="{{ article.sentiment_score }}">
+                        {% if label == 'positive' %}🙂{% elif label == 'negative' %}😠{% else %}😐{% endif %}
+                        <div class="progress">
+                            <div 
+                                class="progress-bar bg-{{ bs_color }}" role="progressbar"
+                                style="width: {{ article.get_sentiment_percentage }}%"
+                                aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"
+                            ></div>
+                        </div>
+                    </td>
                     <td><a href="{{ article.url }}" target="_blank">Go</a></td>
                 </tr>
             {% endwith %}
