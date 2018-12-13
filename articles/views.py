@@ -24,5 +24,5 @@ def load(request):
     Small view that triggers the process for pulling articles and analyzing them.
     """
     if load_articles():
-        return HttpResponse()
+        return HttpResponse('OK')
     return HttpResponse(status=204)
