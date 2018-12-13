@@ -4,7 +4,7 @@
 from newsfeels.settings.base import *
 
 DEBUG = True
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['localhost',]
 
 DATABASES = {
     'default': {

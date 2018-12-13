@@ -15,8 +15,8 @@ If you need to add more custom settings or tweaks, do it in directly at the end 
 
 from newsfeels.settings.base import *
 
-DEBUG = False
-ALLOWED_HOSTS = ['localhost']
+DEBUG = True
+ALLOWED_HOSTS = ['localhost',]
 
 DATABASES = {
     'default': {
