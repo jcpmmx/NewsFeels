@@ -27,4 +27,4 @@ class Sentiment(Enum):
 
     @classmethod
     def choices(cls):
-        return ((s.name, s.value) for s in [cls.POSITIVE, cls.NEGATIVE, cls.NEUTRAL])
+        return ((s.value, s.name) for s in [cls.POSITIVE, cls.NEGATIVE, cls.NEUTRAL])

@@ -31,6 +31,12 @@ class Article(models.Model):
         unique_together = ('source', 'external_id')
         ordering = ('-published',)
 
+    def __str__(self):
+        return '({}) {}'.format(self.get_source_display(), self.title)
+
+    def __repr__(self):
+        return '<Article "{}">'.format(self)
+
     def save(self, *args, **kwargs):
         if not self.external_id:
             uuid_components = (self.source, self.title, self.author, self.published, self.url)
@@ -43,6 +49,13 @@ class Article(models.Model):
         e.g. -0.65 --> 65
         """
         return abs(self.sentiment_score)*100
+
+    def get_sentiment_description(self):
+        """
+        Returns the sentiment as a nicely formatted string.
+        e.g. "Positive (1.00)"
+        """
+        return '{} ({:.2f})'.format(self.get_sentiment_label_display(), self.sentiment_score)
 
     @classmethod
     def create_articles(cls, source, available_articles):

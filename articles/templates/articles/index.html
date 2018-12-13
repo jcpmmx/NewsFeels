@@ -29,7 +29,7 @@
                             </p>
                         </td>
                         <td class="text-small">{{ article.published|date:"M d" }}<br/>{{ article.published|date:"P" }}</td>
-                        <td class="text-large text-center" title="{{ label|title }} ({{ article.sentiment_score }})">
+                        <td class="text-large text-center" title="{{ article.get_sentiment_description }}">
                             {% if label == 'positive' %}🙂{% elif label == 'negative' %}😠{% else %}😐{% endif %}
                             <div class="progress">
                                 <div 
