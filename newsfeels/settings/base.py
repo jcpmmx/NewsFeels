@@ -5,7 +5,7 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = '%_0y!pl+vh!21sso-gqffvg4$&mc%=^5@g^in9%tiu(wt9kzr$'
+SECRET_KEY = '<EDITED>'
 
 # Application definition
 
@@ -92,8 +92,8 @@ STATICFILES_DIRS = [
 # Custom settings, common for all envs
 # ----------------------------------------------------------------------------------------------------------------------
 
-NEWSAPI_API_KEY = '3f726cccc761472fa2d0618858ae3461'
+NEWSAPI_API_KEY = '<EDITED>'
 
 IBM_CLOUD_API_ENDPOINT = 'https://gateway-wdc.watsonplatform.net/natural-language-understanding/api'
-IBM_CLOUD_API_KEY = 'pFYRrF6k6hOHw4mLYF6UmT066oLzhu1Al2pT-7GmZ5YU'
+IBM_CLOUD_API_KEY = '<EDITED>'
 IBM_CLOUD_API_VERSION = '2018-03-16'
